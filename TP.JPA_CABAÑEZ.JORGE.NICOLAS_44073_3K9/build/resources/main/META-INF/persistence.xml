@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- La declaración XML debe ser la primera línea del archivo, antes de cualquier comentario o contenido. -->
+
+<!-- ENCABEZADO -->
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+
+    <!-- En la línea 14 podemos observar la unidad de persistencia. Es fundamental que le coloquemos un nombre.
+     Por defecto se le pone el nombre "example-unit". A dicho nombre haremos referencia desde el metodo Main
+     de nuestro proyecto Java. -->
+
+    <persistence-unit name="PersistenceAppPU" transaction-type="RESOURCE_LOCAL">
+
+        <!-- En la línea 19 vemos un ejemplo en el que se está indicando que la unidad de persistencia administrará
+        la clase entidad Persona. Si mi unidad de persistencia administra múltiples líneas, la declaración se hace
+        del mismo modo. <class>"NombreDelPaquete"."NombreDeLaClase"</class>
+        <class>org.example.EjemploPersona</class> -->
+        <class>Entidades.Articulo</class>
+        <class>Entidades.Categoria</class>
+        <class>Entidades.Cliente</class>
+        <class>Entidades.DetalleFactura</class>
+        <class>Entidades.Domicilio</class>
+        <class>Entidades.Factura</class>
+
+        <properties>
+            <!-- Driver que utilizamos. En este caso H2. -->
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+
+            <!-- URL para conectar con la base de datos H2 -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/>
+
+            <!-- Usuario (por defecto: sa) -->
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+
+            <!-- Contraseña (por defecto: nula)-->
+            <property name="javax.persistence.jdbc.password" value=""/>
+
+            <!-- Esta línea configura Hibernate para que muestre las consultas SQL que genera durante la ejecución
+            en la consola o el log. Cuando hibernate.show_sql está establecido en true, Hibernate imprime las consultas
+            SQL generadas para las operaciones de base de datos (como SELECT, INSERT, UPDATE, DELETE) en el log.
+            Esto es útil para la depuración y el análisis de las consultas que Hibernate está ejecutando
+            en la base de datos. -->
+            <property name="hibernate.show_sql" value="true"/>
+
+            <!-- La línea especifica qué tipo de base de datos estás utilizando y cómo Hibernate debe generar
+            las consultas SQL para interactuar con esa base de datos. -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+
+            <!-- Luego de crear las tablas debo pasarlo al estado update -->
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+        </properties>
+
+    </persistence-unit>
+
+</persistence>
